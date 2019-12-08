@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.kirchnersolutions.picenter'
+version = '1.0.00'
+def build = '100100'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	flatDir {
+		dirs "$rootProject.projectDir/libs"
+	}
+	mavenCentral()
+}
+
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	compile name: 'Utilities-1.1.00'
+	compile name: 'Jama-1.0.3'
+	runtimeOnly 'mysql:mysql-connector-java:8.0.11'
+}
+
+test {
+	useJUnitPlatform()
+}
